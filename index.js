@@ -46,7 +46,7 @@ Buscape.prototype.country = function (country) {
 Buscape.prototype.test = function (test) {
   // Default test to true
   test = (arguments.length === 0 ? true : !!test)
-  return this._service = test ? 'sandbox.buscape.com' : 'bws.buscape.com'; 
+  return this._service = test ? 'sandbox.buscape.com' : 'bws.buscape.com', this;
 };
 
 Buscape.prototype.limit = function (limit) {
