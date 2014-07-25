@@ -16,7 +16,7 @@ var Buscape = function Buscape (opts) {
   this._service = 'bws.buscape.com';
 
   if (opts.keywords) {
-    this._keywords = opts;
+    this._keywords = opts.keywords;
     this.mode = 'search';
   }
 };
