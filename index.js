@@ -58,13 +58,13 @@ Buscape.prototype.limit = function (limit) {
 Buscape.prototype.one = function (one) {
   // Default one to true
   one = (arguments.length === 0 ? true : !!one)
-  return this._one = one, true;
+  return this._one = one, this;
 };
 
 Buscape.prototype.done = function (cb) {
   request
     .get(endpoint({
-      service: this._endpoint,
+      service: this._service,
       method: 'findProductList',
       id: this._id,
       country: this._country || 'BR'
