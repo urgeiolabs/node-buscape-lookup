@@ -1,7 +1,7 @@
 {
   "name": "buscape",
   "version": "0.0.0",
-  "description": "",
+  "description": "A wrapper around buscape's lomadee api",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,16 @@
     "nomnom": "^1.8.0",
     "superagent": "^0.18.2",
     "underscore": "^1.6.0"
+  },
+  "keywords": [
+    "buscape",
+    "lomadee",
+    "ecommerce",
+    "affiliate"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/adamvr/node-buscape-lookup.git"
   },
   "bin": {
     "buscape-lookup": "./bin.js"
