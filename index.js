@@ -71,8 +71,24 @@ Buscape.prototype.done = function (cb) {
     .query({format: 'json'})
     .end(function (err, res) {
       if (err) return cb(err);
-      return cb(null, res.text);
-    });
+      if (!res.body.product) return cb(new Error('Invalid response'));
+
+      // Format results
+      var formatted = format(res.body.product);
+
+      // Limit
+      if (this._limit) {
+        formatted = _.first(formatted, this._limit);
+      }
+
+      // One
+      if (this._one) {
+        formatted = _.first(formatted);
+      }
+
+      return cb(null, formatted);
+    }.bind(this));
+};
 
 var format = function (products) {
   return products.map(function (product) {
