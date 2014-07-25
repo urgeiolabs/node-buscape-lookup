@@ -73,4 +73,38 @@ Buscape.prototype.done = function (cb) {
       if (err) return cb(err);
       return cb(null, res.text);
     });
+
+var format = function (products) {
+  return products.map(function (product) {
+    var p = product.product
+      , name = p.productname || p.productshortname
+      , price = p.pricemin || p.pricemax
+      , offers = p.numoffers
+      , currency = p.currency.abbreviation
+      , link = productLink(p.links)
+      , id = p.id;
+
+    // Filter unusable results
+    if (!p || !name || !price || !link) return null;
+
+    return {
+      name: name,
+      listPrice: price,
+      remaining: offers,
+      currency: currency,
+      url: link,
+      id: id
+    }
+  })
+  .filter(function (p) {
+    return p !== null
+  });
+};
+
+var productLink = function (links) {
+  var productLink = _.find(links, function (l) {
+    return l.link.type === 'product';
+  });
+
+  return productLink.link.url || null;
 };
