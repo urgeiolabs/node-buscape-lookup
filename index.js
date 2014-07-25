@@ -1,7 +1,7 @@
 /**
  * Module dependencies
  */
-var request = require('request')
+var request = require('superagent')
   , _ = require('underscore');
 
 // Endpoint template
