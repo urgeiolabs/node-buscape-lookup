@@ -1,5 +1,5 @@
 {
-  "name": "buscape",
+  "name": "buscape-lookup",
   "version": "0.1.0",
   "description": "A wrapper around buscape's lomadee api",
   "main": "index.js",
