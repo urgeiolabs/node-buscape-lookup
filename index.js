@@ -15,6 +15,9 @@ var Buscape = function Buscape (opts) {
   // Use production by default
   this._service = 'bws.buscape.com';
 
+  // Allow keywords string in place of opts
+  opts = 'string' === typeof opts ? {keywords: opts} : opts;
+
   if (opts.keywords) {
     this._keywords = opts.keywords;
     this.mode = 'search';
