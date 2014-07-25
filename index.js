@@ -52,17 +52,24 @@ Buscape.prototype.test = function (test) {
   return this._service = test ? 'sandbox.buscape.com' : 'bws.buscape.com', this;
 };
 
+// Return a limited number of results
 Buscape.prototype.limit = function (limit) {
   // Don't accept falsy or 0 limits
   if (!limit) return this;
   return this._limit = limit, this;
 };
 
+// Return only one result
 Buscape.prototype.one = function (one) {
   // Default one to true
   one = (arguments.length === 0 ? true : !!one)
   return this._one = one, this;
 };
+
+// Set caller ip address
+Buscape.prototype.client = function (ip) {
+  return this._client = ip, this;
+}
 
 Buscape.prototype.done = function (cb) {
   request
@@ -75,6 +82,7 @@ Buscape.prototype.done = function (cb) {
     .query({keyword: this._keywords})
     .query({priceMin: this._minPrice})
     .query({priceMax: this._priceMax})
+    .query({clientIp: this._client})
     .query({format: 'json'})
     .end(function (err, res) {
       if (err) return cb(err);
