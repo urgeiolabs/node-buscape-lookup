@@ -7,7 +7,11 @@ var request = require('superagent')
 // Endpoint template
 var endpoint = _.template('http://<%=service%>/service/<%=method%>/lomadee/<%=id%>/<%=country%>/');
 
-var Buscape = function Buscape(opts) {
+module.exports = function (opts) {
+  return new Buscape(opts);
+};
+
+var Buscape = function Buscape (opts) {
   // Use production by default
   this._service = 'bws.buscape.com';
 
