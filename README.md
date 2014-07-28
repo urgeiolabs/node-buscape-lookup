@@ -51,6 +51,17 @@ buscape('test')
   });
 ```
 
+Add client IP address if calling on someone else's behalf
+
+```javascript
+var buscape = require('buscape-lookup');
+
+buscape('test')
+  .id('api key')
+  .client('192.168.1.1')
+  .done(function (err, result) { ... })
+```
+
 ## LICENSE
 
 MIT
