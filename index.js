@@ -86,7 +86,8 @@ Buscape.prototype.done = function (cb) {
     .query({format: 'json'})
     .end(function (err, res) {
       if (err) return cb(err);
-      if (!res.body.product) return cb(new Error('Invalid response'));
+      // No products found
+      if (!res.body.product) return cb(null, this._one ? null : [])
 
       // Format results
       var formatted = format(res.body.product);
