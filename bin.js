@@ -50,6 +50,7 @@ lomadee({keywords: opts.keywords})
   .test(opts.test)
   .one(opts.one)
   .limit(opts.limit)
+  .source(opts.source)
   .done(function (err, res) {
     console.log(JSON.stringify(res));
   });

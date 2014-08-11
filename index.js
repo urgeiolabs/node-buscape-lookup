@@ -29,6 +29,11 @@ Buscape.prototype.id = function (id) {
   return this._id = id, this;
 };
 
+// Set source id, whatever the hell that is
+Buscape.prototype.source = function (sourceId) {
+  return this._sourceId, this;
+};
+
 // Set price range
 Buscape.prototype.price = function (price) {
   // Allow min..max style pricerange
@@ -83,6 +88,7 @@ Buscape.prototype.done = function (cb) {
     .query({priceMin: this._minPrice})
     .query({priceMax: this._priceMax})
     .query({clientIp: this._client})
+    .query({sourceId: this._source})
     .query({format: 'json'})
     .end(function (err, res) {
       if (err) return cb(err);
