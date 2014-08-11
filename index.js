@@ -93,7 +93,7 @@ Buscape.prototype.done = function (cb) {
     .end(function (err, res) {
       if (err) return cb(err);
       // No products found
-      if (!res.body.product) return cb(null, this._one ? null : [])
+      if (!res.body.product) res.body.product = [];
 
       // Format results
       var formatted = format(res.body.product);
@@ -105,7 +105,7 @@ Buscape.prototype.done = function (cb) {
 
       // One
       if (this._one) {
-        formatted = _.first(formatted);
+        formatted = _.first(formatted) || null;
       }
 
       return cb(null, formatted);
