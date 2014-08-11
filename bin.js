@@ -46,6 +46,9 @@ var opts = nomnom
     flag: true,
     default: false
   })
+  .option('client', {
+    help: 'Set client ip'
+  })
   .parse();
 
 lomadee({keywords: opts.keywords})
@@ -55,6 +58,7 @@ lomadee({keywords: opts.keywords})
   .one(opts.one)
   .limit(opts.limit)
   .source(opts.source)
+  .client(opts.client)
   .done(function (err, res) {
     console.log(JSON.stringify(res));
   });
