@@ -18,6 +18,10 @@ var opts = nomnom
     abbr: 'p',
     help: 'Price range in the form <min>..<max>'
   })
+  .option('source', {
+    abbr: 's',
+    help: 'Set source id'
+  })
   .option('country', {
     abbr: 'c',
     help: 'Country to query in'
