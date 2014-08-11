@@ -1,6 +1,6 @@
 {
   "name": "buscape-lookup",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "A wrapper around buscape's lomadee api",
   "main": "index.js",
   "scripts": {
