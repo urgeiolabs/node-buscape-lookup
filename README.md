@@ -8,6 +8,7 @@ This module is a simple wrapper around buscape's lomadee publisher api for node.
 
 * [superagent](http://github.com/visionmedia/superagent)
 * [underscore](http://github.com/jashkenas/underscore)
+* [nomnom](http://github.com/harthur/nomnom)
 
 ## Usage examples
 
