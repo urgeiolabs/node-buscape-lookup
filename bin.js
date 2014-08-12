@@ -3,7 +3,7 @@
 /**
  * Dependencies
  */
-var lomadee = require('./')
+var buscape = require('./')
   , nomnom = require('nomnom');
 
 var opts = nomnom
@@ -51,7 +51,7 @@ var opts = nomnom
   })
   .parse();
 
-lomadee({keywords: opts.keywords})
+buscape({keywords: opts.keywords})
   .id(opts.id)
   .country(opts.country)
   .test(opts.test)
