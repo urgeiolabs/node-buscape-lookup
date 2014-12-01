@@ -5,7 +5,7 @@ var request = require('superagent')
   , _ = require('underscore');
 
 // Endpoint template
-var endpoint = _.template('http://<%=service%>/service/<%=method%>/<%=id%>/<%=country%>/');
+var endpoint = _.template('http://<%=service%>/service/<%=method%>/lomadee/<%=id%>/<%=country%>/');
 
 module.exports = function (opts) {
   return new Buscape(opts);
