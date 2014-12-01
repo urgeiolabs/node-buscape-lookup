@@ -19,7 +19,6 @@ var opts = nomnom
     help: 'Price range in the form <min>..<max>'
   })
   .option('source', {
-    abbr: 's',
     help: 'Set source id'
   })
   .option('country', {
@@ -49,6 +48,10 @@ var opts = nomnom
   .option('client', {
     help: 'Set client ip'
   })
+  .option('seller', {
+    help: 'Set seller id',
+    abbr: 's'
+  })
   .parse();
 
 buscape({keywords: opts.keywords})
@@ -59,6 +62,7 @@ buscape({keywords: opts.keywords})
   .limit(opts.limit)
   .source(opts.source)
   .client(opts.client)
+  .seller(opts.seller)
   .done(function (err, res) {
     console.log(JSON.stringify(res));
   });
