@@ -124,12 +124,12 @@ Buscape.prototype.done = function (cb) {
 
 var format = function (products) {
   return products.map(function (product) {
-    var p = product.product
-      , name = p.productname || p.productshortname
-      , price = p.pricemin || p.pricemax
-      , offers = p.numoffers
-      , currency = p.currency.abbreviation
+    var p = product.offer
+      , name = p.offername || p.offershortname
+      , price = p.price.value
+      , currency = p.price.currency.abbreviation
       , link = productLink(p.links)
+      , seller = p.seller.id
       , id = p.id;
 
     // Filter unusable results
@@ -138,9 +138,9 @@ var format = function (products) {
     return {
       name: name,
       listPrice: price,
-      remaining: offers,
       currency: currency,
       url: link,
+      sellerId: seller,
       id: id
     }
   })
@@ -151,7 +151,7 @@ var format = function (products) {
 
 var productLink = function (links) {
   var productLink = _.find(links, function (l) {
-    return l.link.type === 'product';
+    return l.link.type === 'offer';
   });
 
   return productLink.link.url || null;
