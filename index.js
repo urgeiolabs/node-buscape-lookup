@@ -131,6 +131,7 @@ var format = function (products) {
       , currency = p.price.currency.abbreviation
       , link = productLink(p.links)
       , seller = p.seller.id
+      , sellerName = p.seller.sellername
       , id = p.id;
 
     // Filter unusable results
@@ -142,6 +143,7 @@ var format = function (products) {
       currency: currency,
       url: link,
       sellerId: seller,
+      sellerName: sellerName
       id: id
     }
   })
