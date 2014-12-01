@@ -98,6 +98,7 @@ Buscape.prototype.done = function (cb) {
     .query({priceMax: this._maxPrice})
     .query({clientIp: this._client})
     .query({sourceId: this._sourceId})
+    .query({allowedSellers: this._seller})
     .query({format: 'json'})
     .end(function (err, res) {
       if (err) return cb(err);
