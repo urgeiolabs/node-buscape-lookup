@@ -76,35 +76,45 @@ Buscape.prototype.client = function (ip) {
   return this._client = ip, this;
 }
 
+// Set seller id
+Buscape.prototype.seller = function (seller) {
+  return this._seller = seller, this;
+};
+
 Buscape.prototype.done = function (cb) {
+  var limit = this._limit
+    , one = this._one
+    , seller = this._seller;
+
   request
     .get(endpoint({
       service: this._service,
-      method: 'findProductList',
+      method: 'findOfferList',
       id: this._id,
       country: this._country || 'BR'
     }))
     .query({keyword: this._keywords})
     .query({priceMin: this._minPrice})
-    .query({priceMax: this._priceMax})
+    .query({priceMax: this._maxPrice})
     .query({clientIp: this._client})
     .query({sourceId: this._sourceId})
     .query({format: 'json'})
     .end(function (err, res) {
       if (err) return cb(err);
-      // No products found
-      if (!res.body.product) res.body.product = [];
+
+      // No offers found
+      if (!res.body.offer) res.body.offer = [];
 
       // Format results
-      var formatted = format(res.body.product);
+      var formatted = format(res.body.offer);
 
       // Limit
-      if (this._limit) {
-        formatted = _.first(formatted, this._limit);
+      if (limit) {
+        formatted = _.first(formatted, limit);
       }
 
       // One
-      if (this._one) {
+      if (one) {
         formatted = _.first(formatted) || null;
       }
 
