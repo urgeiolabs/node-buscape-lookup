@@ -143,7 +143,7 @@ var format = function (products) {
       currency: currency,
       url: link,
       sellerId: seller,
-      sellerName: sellerName
+      sellerName: sellerName,
       id: id
     }
   })
