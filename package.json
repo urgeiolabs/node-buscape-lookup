@@ -21,7 +21,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/adamvr/node-buscape-lookup.git"
+    "url": "git://github.com/urgeiolabs/node-buscape-lookup.git"
   },
   "bin": {
     "buscape-lookup": "./bin.js"
