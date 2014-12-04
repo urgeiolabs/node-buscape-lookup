@@ -52,6 +52,10 @@ var opts = nomnom
     help: 'Set seller id',
     abbr: 's'
   })
+  .option('page', {
+    help: 'Set page',
+    abbr: 'p'
+  })
   .parse();
 
 buscape({keywords: opts.keywords})
@@ -63,6 +67,7 @@ buscape({keywords: opts.keywords})
   .source(opts.source)
   .client(opts.client)
   .seller(opts.seller)
+  .page(opts.page)
   .done(function (err, res) {
     console.log(JSON.stringify(res));
   });

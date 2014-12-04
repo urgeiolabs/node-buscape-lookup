@@ -81,6 +81,10 @@ Buscape.prototype.seller = function (seller) {
   return this._seller = seller, this;
 };
 
+Buscape.prototype.page = function (page) {
+  return this._page = page, this;
+};
+
 Buscape.prototype.done = function (cb) {
   var limit = this._limit
     , one = this._one
@@ -100,6 +104,7 @@ Buscape.prototype.done = function (cb) {
     .query({sourceId: this._sourceId})
     .query({allowedSellers: this._seller})
     .query({format: 'json'})
+    .query({page: this._page})
     .end(function (err, res) {
       if (err) return cb(err);
 
