@@ -78,6 +78,9 @@ Buscape.prototype.client = function (ip) {
 
 // Set seller id
 Buscape.prototype.seller = function (seller) {
+  // Switch to buscape mode
+  if (seller === 'buscape') return this._buscape = true, this;
+
   return this._seller = seller, this;
 };
 
@@ -88,12 +91,13 @@ Buscape.prototype.page = function (page) {
 Buscape.prototype.done = function (cb) {
   var limit = this._limit
     , one = this._one
+    , buscape = this._buscape
     , seller = this._seller;
 
   request
     .get(endpoint({
       service: this._service,
-      method: 'findOfferList',
+      method: buscape ? 'findProductList' : 'findOfferList',
       id: this._id,
       country: this._country || 'BR'
     }))
@@ -102,17 +106,17 @@ Buscape.prototype.done = function (cb) {
     .query({priceMax: this._maxPrice})
     .query({clientIp: this._client})
     .query({sourceId: this._sourceId})
-    .query({allowedSellers: this._seller})
+    .query({allowedSellers: buscape ? null : this._seller})
     .query({format: 'json'})
     .query({page: this._page})
     .end(function (err, res) {
       if (err) return cb(err);
 
       // No offers found
-      if (!res.body.offer) res.body.offer = [];
+      if (!res.body.offer && !res.body.product) res.body.offer = res.body.product = [];
 
       // Format results
-      var formatted = format(res.body.offer);
+      var formatted = buscape ? formatBuscape(res.body.product) : format(res.body.offer);
 
       // Limit
       if (limit) {
@@ -157,9 +161,33 @@ var format = function (products) {
   });
 };
 
+var formatBuscape = function (products) {
+  return products.map(function (product) {
+    var p = product.product
+      , name = p.productname || p.productshortname
+      , price = p.pricemin || p.pricemax
+      , offers = p.numoffers
+      , currency = p.currency.abbreviation
+      , link = productLink(p.links)
+      , id = p.id;
+
+    if (!p || !name || !price || !link) return null;
+
+    return {
+      name: name,
+      listPrice: price,
+      currency: currency,
+      url: link,
+      id: id
+    }
+  }).filter(function (p) {
+    return p !== null;
+  });
+};
+
 var productLink = function (links) {
   var productLink = _.find(links, function (l) {
-    return l.link.type === 'offer';
+    return l.link.type === 'offer' || l.link.type === 'product';
   });
 
   return productLink.link.url || null;
